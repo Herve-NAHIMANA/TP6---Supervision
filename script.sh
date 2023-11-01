@@ -12,8 +12,8 @@ else
     sudo mv minikube /usr/local/bin/
     echo "Minikube a été installé avec succès."
 fi
-
-if minikube status | grep -q "host: Stopped"; then
+status=$(minikube status | awk 'NR==1{print $2}')
+if [ "$status" == "Stopped" ]; then
     echo "Minikube n'est pas en cours d'exécution."
     echo "Lancement de minikube."
     minikube start
