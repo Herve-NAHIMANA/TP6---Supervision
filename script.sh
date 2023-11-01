@@ -13,7 +13,7 @@ else
     echo "Minikube a été installé avec succès."
 fi
 status=$(minikube status | awk 'NR==1{print $2}')
-if [ "$status" == "Stopped" ]; then
+if [ "$status" == "Profile" ]; then
     echo "Minikube n'est pas en cours d'exécution."
     echo "Lancement de minikube."
     minikube start
