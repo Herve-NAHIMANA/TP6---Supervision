@@ -37,10 +37,9 @@ while IFS= read -r line; do
     pod_name=$(echo "$line" | awk '{print $1}')
     pod_status=$(echo "$line" | awk '{print $3}')
     # Exécute la commande 'kubectl get pods' et capture la sortie
-     if [[ "$pod_status" == "Running" ]]; then
+    if [[ "$pod_status" == "Running" ]]; then
         current_count=$((current_count + 1))
         echo "Le pod $pod_name est en état 'Running'."
-    fi
     if [ "$current_count" -eq "$target_count" ]; then
         kubectl port-forward --address 0.0.0.0 svc/prometheus-kube-prometheus-prometheus -n monitoring 9090 
         break
