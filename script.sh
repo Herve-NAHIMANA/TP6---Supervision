@@ -25,8 +25,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 kubectl create namespace monitoring
 
 # Installer Prometheus avec Helm
-helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring
-
+helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring -f mysql/values.yaml
 # Installation de mysql
 kubectl create secret generic mysecret --from-literal=ROOT_PASSWORD=demo -n monitoring
 kubectl apply -f mysql/mysql-statefulset.yaml
@@ -43,4 +42,4 @@ while IFS= read -r line; do
     fi
     echo "Le pod $pod_name est en état 'Pending', en attente..."
     sleep 5  # Attendre quelques secondes avant de vérifier à nouveau
-done
+done <<< "$pods_list"
