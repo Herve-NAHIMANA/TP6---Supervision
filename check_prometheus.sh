@@ -8,7 +8,7 @@ target_count=3
 current_count=0
 
 # Exécute la commande 'kubectl get pods' et capture la sortie
-pods_list=($(kubectl --namespace $namespace get pods -l "release=prometheus"))
+pods_list=($(kubectl get pods -n $namespace | grep "prometheus"))
 
 # Parcours de la liste des pods
 for line in "${pods_list[@]}"; do
