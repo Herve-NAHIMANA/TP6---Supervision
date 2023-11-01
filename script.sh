@@ -11,6 +11,11 @@ else
     chmod +x minikube
     sudo mv minikube /usr/local/bin/
     echo "Minikube a été installé avec succès."
+fi
+
+if minikube status | grep -q "host: Stopped"; then
+    echo "Minikube n'est pas en cours d'exécution."
+    echo "Lancement de minikube."
     minikube start
 fi
 # Ajout du référentiel Helm
