@@ -31,4 +31,15 @@ helm install prometheus prometheus-community/kube-prometheus-stack --namespace m
 kubectl create secret generic mysecret --from-literal=ROOT_PASSWORD=demo -n monitoring
 kubectl apply -f mysql/mysql-statefulset.yaml
 # Expose le port 9090
-kubectl port-forward --address 0.0.0.0 svc/prometheus-kube-prometheus-prometheus -n monitoring 9090 
+pod_name="nom_du_pod"
+
+while true; do
+    # Exécute la commande 'kubectl get pods' et capture la sortie
+    pod_status=$(kubectl get pods $pod_name -o jsonpath='{.status.phase}')
+    if [ "$pod_status" != "Pending" ]; then
+        kubectl port-forward --address 0.0.0.0 svc/prometheus-kube-prometheus-prometheus -n monitoring 9090 
+        break
+    fi
+    echo "Le pod $pod_name est en état 'Pending', en attente..."
+    sleep 5  # Attendre quelques secondes avant de vérifier à nouveau
+done
