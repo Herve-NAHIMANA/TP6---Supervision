@@ -33,7 +33,7 @@ kubectl apply -f mysql/mysql-statefulset.yaml
 pod_list=($kubectl --namespace monitoring get pods -l "release=prometheus")
 target_count=3
 current_count=0
-while IFS= read -r line; do
+for line in "${pods_list[@]}"; do
     pod_name=$(echo "$line" | awk '{print $1}')
     pod_status=$(echo "$line" | awk '{print $3}')
     # Exécute la commande 'kubectl get pods' et capture la sortie
