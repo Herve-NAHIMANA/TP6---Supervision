@@ -29,3 +29,4 @@ helm install prometheus prometheus-community/kube-prometheus-stack --namespace m
 # Installation de mysql
 kubectl create secret generic mysecret --from-literal=ROOT_PASSWORD=demo -n monitoring
 kubectl apply -f mysql/mysql-statefulset.yaml
+kubectl apply -f grafana/
