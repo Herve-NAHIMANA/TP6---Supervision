@@ -30,7 +30,7 @@ helm install prometheus prometheus-community/kube-prometheus-stack --namespace m
 kubectl create secret generic mysecret --from-literal=ROOT_PASSWORD=demo -n monitoring
 kubectl apply -f mysql/mysql-statefulset.yaml
 # Expose le port 9090
-pod_list=($(kubectl --namespace monitoring get pods -l "release=prometheus"))
+pods_list=($(kubectl --namespace monitoring get pods -l "release=prometheus"))
 target_count=3
 current_count=0
 for line in "${pods_list[@]}"; do
