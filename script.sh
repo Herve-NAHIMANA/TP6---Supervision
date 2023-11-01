@@ -48,4 +48,4 @@ for line in "${pods_list[@]}"; do
         echo "Le pod $pod_name est en état 'Pending', en attente..."
         sleep 5  # Attendre quelques secondes avant de vérifier à nouveau
     fi
-done <<< "$pods_list"
+done
